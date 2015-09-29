@@ -1,4 +1,5 @@
 Rickshaw.namespace('Rickshaw.Graph.RangeSlider');
+jQuery.widget.bridge( "rickshaw_ui_slider", jQuery.ui.slider );
 
 Rickshaw.Graph.RangeSlider = Rickshaw.Class.create({
 
@@ -24,7 +25,7 @@ Rickshaw.Graph.RangeSlider = Rickshaw.Class.create({
 		var self = this;
 
 		$( function() {
-			$(element).slider( {
+			$(element).rickshaw_ui_slider( {
 				range: true,
 				min: domain[0],
 				max: domain[1],
@@ -68,12 +69,12 @@ Rickshaw.Graph.RangeSlider = Rickshaw.Class.create({
 		var graph = this.graph;
 		var $ = jQuery;
 
-		var values = $(element).slider('option', 'values');
+		var values = $(element).rickshaw_ui_slider('option', 'values');
 
 		var domain = graph.dataDomain();
 
-		$(element).slider('option', 'min', domain[0]);
-		$(element).slider('option', 'max', domain[1]);
+		$(element).rickshaw_ui_slider('option', 'min', domain[0]);
+		$(element).rickshaw_ui_slider('option', 'max', domain[1]);
 
 		if (graph.window.xMin == null) {
 			values[0] = domain[0];
@@ -82,11 +83,10 @@ Rickshaw.Graph.RangeSlider = Rickshaw.Class.create({
 			values[1] = domain[1];
 		}
 
-		$(element).slider('option', 'values', values);
+		$(element).rickshaw_ui_slider('option', 'values', values);
 	},
 
 	onSlide: function(callback) {
 		this.slideCallbacks.push(callback);
 	}
 });
-
